@@ -1,125 +1,109 @@
+\<p align="right"\>
+⚠️ \<b\>هشدار:\</b\> این نرم‌افزار اطلاعات را به صورت غیرقابل بازگشت پاک می‌کند. لطفاً با نهایت احتیاط استفاده کنید. مسئولیت هرگونه استفاده، مجاز یا غیرمجاز، بر عهده کاربر است. ⚠️
+\</p\>
 
-<div dir="rtl" align="right">
+# 🔐 پاک‌سازی ایمن اطلاعات (Secure Eraser) 🗑️
 
-# 🛡️ نرم‌افزار پاک‌سازی ایمن اطلاعات (Secure File Eraser)
+این نرم‌افزار قدرتمند به شما کمک می‌کند تا اطلاعات حساس خود، از جمله **فیلم‌های دوربین مداربسته (DVR/NVR)** و سایر فایل‌ها و پوشه‌ها را به صورت ایمن و غیرقابل بازیابی پاک کنید.
 
-⚠️ **هشدار مهم**:  
-اطلاعات پاک‌شده توسط این نرم‌افزار به‌هیچ‌وجه قابل بازیابی نخواهند بود!  
-لطفاً با دقت و مسئولیت‌پذیری کامل از این ابزار استفاده نمایید.  
-**مسئولیت هرگونه استفاده مجاز و غیرمجاز از این نرم‌افزار به‌طور کامل بر عهده کاربر است.**
+## 🌟 قابلیت‌ها
 
-## 📝 معرفی
-این نرم‌افزار با استفاده از الگوریتم‌های استاندارد امنیتی، فایل‌ها و اطلاعات شما را به‌صورت کاملاً ایمن و غیرقابل بازیابی پاک‌سازی می‌کند. مناسب برای حذف اسناد محرمانه، اطلاعات حساس و هرگونه داده‌ای که نیاز به نابودی دائمی دارد.
+  * **پاک‌سازی ایمن فایل‌ها و پوشه‌ها:** حذف دائمی اطلاعات با استفاده از متدهای پیشرفته.
+  * **پشتیبانی از متدهای مختلف پاک‌سازی:**
+      * **Simple Overwrite (1-pass):** بازنویسی یک‌باره با داده‌های تصادفی برای امنیت پایه و سرعت بالا.
+      * **NIST 800-88 (3-pass):** استاندارد امنیتی معتبر با سه مرحله بازنویسی تصادفی.
+      * **Gutmann (35-pass):** سی‌و‌پنج مرحله بازنویسی با الگوهای پیچیده برای امنیت فوق‌العاده بالا.
+  * **شناسایی و انتخاب آسان:**
+      * انتخاب فایل‌ها و پوشه‌ها از طریق رابط کاربری.
+      * قابلیت کشیدن و رها کردن (Drag & Drop) فایل‌ها و پوشه‌ها.
+      * شناسایی خودکار پارتیشن‌های استاندارد.
+      * قابلیت ویژه **"شناسایی هارد DVR/NVR"** برای کاربران ویندوز (نیاز به دسترسی مدیر).
+  * **رابط کاربری دوستانه:** محیط گرافیکی ساده و قابل فهم با نمایش وضعیت پیشرفت.
+  * **گزارش عملیات:** ارائه گزارش کامل از فایل‌های پاک شده و خطاهای احتمالی.
+  * **اجرا با دسترسی مدیر (Administrator):** توصیه می‌شود برای عملکرد کامل، به خصوص برای شناسایی و حذف درایوها، برنامه را با دسترسی مدیر اجرا کنید.
 
-## 🧩 قابلیت‌های کلیدی
-- 🔒 پشتیبانی از استانداردهای امنیتی معتبر جهانی
-- 🗂️ امکان حذف همزمان چندین فایل یا کل محتوای پوشه
-- 📊 نمایش پیشرفت عملیات به‌صورت زنده
-- 🚀 رابط کاربری ساده و کاربرپسند
-- ⚙️ انتخاب روش پاک‌سازی بر اساس سطح امنیت مورد نیاز
+## 🖥️ راهنمای استفاده از قابلیت پاک‌سازی فیلم‌های DVR/NVR
 
-## 🛠️ روش‌های پاک‌سازی پشتیبانی شده
-| روش پاک‌سازی | سطح امنیت | توضیحات |
-|--------------|-----------|---------|
-| `DoD 5220.22-M` | 🔥🔥🔥🔥🔥 | استاندارد وزارت دفاع آمریکا (3 مرحله‌ای) |
-| `NIST 800-88 Clear` | 🔥🔥🔥 | استاندارد NIST برای حذف سریع |
-| `NIST 800-88 Purge` | 🔥🔥🔥🔥🔥 | حذف غیرقابل بازگشت با دستورات سخت‌افزاری |
-| `Gutmann (35-pass)` | 🔥🔥🔥🔥🔥🔥 | ایمن‌ترین روش (35 مرحله‌ای) |
-| `Bit Toggle` | 🔥🔥🔥🔥 | تناوب بیتی برای اطلاعات حساس |
-| و ۴ روش دیگر... | | |
+برای پاک‌سازی فیلم‌های دوربین مداربسته که معمولاً روی هاردهای DVR/NVR ذخیره می‌شوند، مراحل زیر را دنبال کنید:
 
-## 📥 راهنمای نصب و اجرا
-1. مطمئن شوید پایتون 3.x روی سیستم شما نصب است
-2. کتابخانه‌های مورد نیاز را نصب کنید:
-```bash
-pip install tkinter
-```
-3. برنامه را اجرا کنید:
-```bash
-python delete.py
-```
+1.  **اتصال هارد:** هارد DVR/NVR خود را به کامپیوتر متصل کنید.
+2.  **اجرای برنامه با دسترسی مدیر:** برنامه `Secure Eraser` را با راست کلیک و انتخاب "Run as administrator" اجرا کنید.
+3.  **شناسایی هارد DVR:** روی دکمه "شناسایی هارد DVR/NVR (مخصوص ویندوز)" کلیک کنید. این قابلیت تنها در ویندوز موجود است.
+4.  **مشاهده اطلاعات هارد:** یک پنجره اطلاعاتی باز می‌شود که لیست هاردهای فیزیکی متصل به سیستم شما را نمایش می‌دهد. اگر هارد DVR شما پارتیشن قابل خواندن توسط ویندوز نداشته باشد (مثلاً فرمت ext4 لینوکس)، تعداد پارتیشن‌های آن صفر نمایش داده می‌شود.
+5.  **دسترسی به فایل‌ها (مهم):** برای دسترسی به فایل‌های این هاردها در ویندوز، باید نرم‌افزار جانبی مانند **Ext2Fsd** یا **Paragon Linux File Systems for Windows** را نصب کنید تا یک نام درایو (مثلاً E:) به آن اختصاص یابد.
+6.  **انتخاب و پاک‌سازی:** پس از نصب این ابزارها و مشاهده درایو در ویندوز، می‌توانید از دکمه "انتخاب پوشه" برای انتخاب پوشه حاوی فیلم‌های دوربین مداربسته و شروع عملیات پاک‌سازی ایمن استفاده کنید.
 
-## 🖥️ راهنمای استفاده
-1. با استفاده از دکمه‌های «انتخاب چند فایل» یا «انتخاب پوشه»، فایل‌های مورد نظر را انتخاب کنید
-2. روش پاک‌سازی مناسب را از لیست انتخاب نمایید
-3. روی دکمه «شروع حذف ایمن» کلیک کنید
-4. عملیات پاک‌سازی آغاز شده و پیشرفت آن قابل مشاهده خواهد بود
+## 🛠️ نصب و اجرا
 
-## ⚠️ هشدارها و نکات ایمنی
-- قبل از حذف از پشتیبان‌گیری اطلاعات مهم اطمینان حاصل کنید
-- این ابزار فایل‌ها را به‌طور دائمی و غیرقابل بازگشت نابود می‌کند
-- از حذف فایل‌های سیستمی و حیاتی خودداری نمایید
-- در محیط‌های سازمانی با مسئول فناوری اطلاعات هماهنگ کنید
+این نرم‌افزار با پایتون ۳ و PyQt5 توسعه یافته است.
 
-## 👤 سازنده
-**محمدعلی عباسپور**  
-توسعه‌دهنده نرم‌افزارهای تخصصی دوربین مداربسته و سیستم‌های امنیتی
+1.  **نصب پیش‌نیازها:**
+    ```bash
+    pip install PyQt5 psutil
+    ```
+2.  **اجرا:**
+    ```bash
+    python delete.py
+    ```
+    (توصیه می‌شود در ویندوز با دسترسی مدیر اجرا شود.)
 
-🌐 [وبسایت رسمی اینتل سافت](https://intellsoft.ir)  
-📧 [تماس با پشتیبانی](mailto:support@intellsoft.ir)
+-----
 
-</div>
+\<p align="left"\>
+⚠️ \<b\>Warning:\</b\> This software irrevocably erases data. Please use with extreme caution. The user is solely responsible for any authorized or unauthorized use. ⚠️
+\</p\>
 
----
+# 🔐 Secure Eraser 🗑️
 
-<div dir="ltr" align="left">
+This powerful software helps you securely and irreversibly erase sensitive data, including **CCTV (DVR/NVR) footage**, and other files and folders.
 
-# 🛡️ Secure File Eraser Software
+## 🌟 Features
 
-⚠️ **Critical Warning**:  
-Data erased by this software is **permanently unrecoverable**!  
-Please use this tool with extreme caution and full responsibility.  
-**The user bears complete responsibility for any authorized or unauthorized use of this software.**
+  * **Secure File and Folder Deletion:** Permanently erase data using advanced methods.
+  * **Multiple Erasing Methods Supported:**
+      * **Simple Overwrite (1-pass):** One-pass random data overwrite for basic security and high speed.
+      * **NIST 800-88 (3-pass):** A recognized security standard with three random overwrite passes.
+      * **Gutmann (35-pass):** Thirty-five passes with complex patterns for extremely high security.
+  * **Easy Detection and Selection:**
+      * Select files and folders via the user interface.
+      * Drag & Drop functionality for files and folders.
+      * Automatic detection of standard partitions.
+      * Special feature for **"DVR/NVR Hard Drive Detection"** for Windows users (requires administrator access).
+  * **User-Friendly Interface:** Simple and intuitive graphical environment with progress display.
+  * **Operation Report:** Provides a comprehensive report of successfully erased files and any errors.
+  * **Run as Administrator:** It is recommended to run the application with administrator privileges for full functionality, especially for drive detection and deletion.
 
-## 📝 Introduction
-This software securely erases files using certified data destruction algorithms, ensuring your sensitive information is permanently destroyed. Ideal for confidential documents, sensitive data, and any information requiring permanent deletion.
+## 🖥️ How to Erase DVR/NVR Footage
 
-## 🧩 Key Features
-- 🔒 Support for international security standards
-- 🗂️ Bulk file/folder deletion capabilities
-- 📊 Real-time progress monitoring
-- 🚀 Intuitive user-friendly interface
-- ⚙️ Customizable erasure methods based on security needs
+To erase CCTV footage typically stored on DVR/NVR hard drives, follow these steps:
 
-## 🛠️ Supported Erasure Methods
-| Erasure Method | Security Level | Description |
-|----------------|----------------|-------------|
-| `DoD 5220.22-M` | 🔥🔥🔥🔥🔥 | US Department of Defense Standard (3-pass) |
-| `NIST 800-88 Clear` | 🔥🔥🔥 | NIST Standard for quick erasure |
-| `NIST 800-88 Purge` | 🔥🔥🔥🔥🔥 | Hardware-level secure erase |
-| `Gutmann (35-pass)` | 🔥🔥🔥🔥🔥🔥 | Most secure method (35 passes) |
-| `Bit Toggle` | 🔥🔥🔥🔥 | Bit toggling for sensitive data |
-| And 4 other methods... | | |
+1.  **Connect the Hard Drive:** Connect your DVR/NVR hard drive to your computer.
+2.  **Run as Administrator:** Right-click on the `Secure Eraser` application and choose "Run as administrator".
+3.  **Detect DVR Hard Drive:** Click the "Detect DVR/NVR Hard Drive (Windows Only)" button. This feature is only available on Windows.
+4.  **View Drive Information:** An information window will pop up, listing the physical hard drives connected to your system. If your DVR hard drive does not have a readable partition by Windows (e.g., Linux ext4 format), its partition count will show as zero.
+5.  **Accessing Files (Important):** To access files on these hard drives in Windows, you must install third-party software such as **Ext2Fsd** or **Paragon Linux File Systems for Windows** to assign a drive letter (e.g., E:).
+6.  **Select and Erase:** After installing these tools and seeing the drive appear in Windows, you can use the "Select Folder" button to choose the folder containing the CCTV footage and begin the secure erasure process.
 
-## 📥 Installation Guide
-1. Ensure Python 3.x is installed
-2. Install required libraries:
-```bash
-pip install tkinter
-```
-3. Run the application:
-```bash
-python delete.py
-```
+## 🛠️ Installation and Execution
 
-## 🖥️ User Guide
-1. Select files using "Choose Files" or "Choose Folder" buttons
-2. Select preferred erasure method from dropdown
-3. Click "Start Secure Erase" button
-4. Monitor progress in real-time during erasure
+This software is developed using Python 3 and PyQt5.
 
-## ⚠️ Warnings & Safety Notes
-- Always backup important data before erasure
-- This software PERMANENTLY destroys files beyond recovery
-- Avoid erasing system-critical files
-- Consult with IT administrators in organizational environments
+1.  **Install Prerequisites:**
+    ```bash
+    pip install PyQt5 psutil
+    ```
+2.  **Run:**
+    ```bash
+    python delete.py
+    ```
+    (It is recommended to run as administrator on Windows.)
 
-## 👤 Developer
-**Mohammad Ali Abbaspor**  
-Specialist in CCTV Software and Security Systems
+-----
 
-🌐 [Official Intellsoft Website](https://intellsoft.ir)  
-📧 [Support Contact](mailto:support@intellsoft.ir)
+### 👨‍💻 Developed by: Mohammadali Abbaspour
 
-</div>
-```
+Specialized CCTV Software
+
+🔗 Visit my website: [Intellsoft.ir](https://intellsoft.ir)
+
+-----
