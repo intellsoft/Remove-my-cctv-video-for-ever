@@ -49,9 +49,9 @@
 
 -----
 
-\<p align="left"\>
-⚠️ \<b\>Warning:\</b\> This software irrevocably erases data. Please use with extreme caution. The user is solely responsible for any authorized or unauthorized use. ⚠️
-\</p\>
+<p align="left">
+⚠️ <b>Warning:</b> This software irrevocably erases data. Please use with extreme caution. The user is solely responsible for any authorized or unauthorized use. ⚠️
+</p>
 
 # 🔐 Secure Eraser 🗑️
 
