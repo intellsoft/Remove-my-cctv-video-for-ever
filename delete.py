@@ -4,16 +4,78 @@ import subprocess
 import platform
 import psutil
 
-# برای بررسی دسترسی ادمین و اجرای دستورات خاص ویندوز
+# برای بررسی دسترسی ادمین
 if platform.system() == "Windows":
     import ctypes
 
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QPushButton, QLabel,
     QFileDialog, QListWidget, QMessageBox, QComboBox, QTextEdit,
-    QProgressBar, QHBoxLayout, QListWidgetItem, QDialog, QDialogButtonBox
+    QProgressBar, QHBoxLayout, QListWidgetItem, QDialog, QDialogButtonBox, QStyle
 )
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
+from PyQt5.QtGui import QFont, QIcon
+
+# --- استایل شیت برای زیباسازی برنامه ---
+STYLESHEET = """
+QWidget {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 10pt;
+}
+QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:disabled {
+    background-color: #95a5a6;
+    color: #bdc3c7;
+}
+QListWidget {
+    background-color: #34495e;
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+    padding: 5px;
+}
+QListWidget::item:selected {
+    background-color: #3498db;
+    color: white;
+}
+QComboBox {
+    border: 1px solid #3498db;
+    border-radius: 4px;
+    padding: 5px;
+}
+QComboBox::drop-down {
+    border: none;
+}
+QTextEdit {
+    background-color: #34495e;
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+}
+QProgressBar {
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #34495e;
+}
+QProgressBar::chunk {
+    background-color: #27ae60;
+    border-radius: 3px;
+}
+QLabel#credit_label {
+    color: #95a5a6;
+    font-size: 8pt;
+}
+"""
 
 # ثابت‌ها برای تعریف متدهای حذف
 SECURE_METHODS = {
@@ -115,20 +177,25 @@ class SecureEraser(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("پاک‌سازی ایمن اطلاعات")
-        self.setGeometry(200, 200, 700, 600)
+        self.setGeometry(200, 200, 700, 580)
         self.thread = None
         self.init_ui()
         self.check_permissions()
+        self.setStyleSheet(STYLESHEET)
 
     def init_ui(self):
         self.layout = QVBoxLayout()
+        self.layout.setSpacing(10)
+        self.layout.setContentsMargins(15, 15, 15, 15)
 
         select_layout = QHBoxLayout()
-        self.select_file_btn = QPushButton("انتخاب فایل‌ها")
+        self.select_file_btn = QPushButton(" انتخاب فایل‌ها")
+        self.select_file_btn.setIcon(self.style().standardIcon(QStyle.SP_FileIcon))
         self.select_file_btn.clicked.connect(self.select_files)
         select_layout.addWidget(self.select_file_btn)
         
-        self.select_folder_btn = QPushButton("انتخاب پوشه")
+        self.select_folder_btn = QPushButton(" انتخاب پوشه")
+        self.select_folder_btn.setIcon(self.style().standardIcon(QStyle.SP_DirIcon))
         self.select_folder_btn.clicked.connect(self.select_folder)
         select_layout.addWidget(self.select_folder_btn)
         self.layout.addLayout(select_layout)
@@ -140,23 +207,15 @@ class SecureEraser(QWidget):
         self.file_list.dropEvent = self.drop_event
         self.layout.addWidget(self.file_list)
         
-        self.remove_selected_btn = QPushButton("حذف مورد انتخاب شده از لیست")
+        self.remove_selected_btn = QPushButton(" حذف مورد از لیست")
+        self.remove_selected_btn.setIcon(self.style().standardIcon(QStyle.SP_DialogDiscardButton))
         self.remove_selected_btn.clicked.connect(self.remove_selected_from_list)
         self.layout.addWidget(self.remove_selected_btn)
-
-        # دکمه‌های شناسایی دیسک
-        disk_layout = QHBoxLayout()
-        self.detect_partitions_btn = QPushButton("شناسایی پارتیشن‌های استاندارد")
-        self.detect_partitions_btn.clicked.connect(self.detect_partitions)
-        disk_layout.addWidget(self.detect_partitions_btn)
-
-        # این دکمه فقط در ویندوز نمایش داده می‌شود
-        if platform.system() == "Windows":
-            self.detect_dvr_btn = QPushButton("شناسایی هارد DVR/NVR (مخصوص ویندوز)")
-            self.detect_dvr_btn.clicked.connect(self.detect_physical_disks_windows)
-            disk_layout.addWidget(self.detect_dvr_btn)
         
-        self.layout.addLayout(disk_layout)
+        self.detect_partitions_btn = QPushButton(" شناسایی پارتیشن‌ها")
+        self.detect_partitions_btn.setIcon(self.style().standardIcon(QStyle.SP_DriveHDIcon))
+        self.detect_partitions_btn.clicked.connect(self.detect_partitions)
+        self.layout.addWidget(self.detect_partitions_btn)
 
         self.method_combo = QComboBox()
         self.method_combo.addItems(SECURE_METHODS.keys())
@@ -165,27 +224,38 @@ class SecureEraser(QWidget):
 
         self.method_info = QTextEdit()
         self.method_info.setReadOnly(True)
-        self.method_info.setMaximumHeight(80)
+        self.method_info.setMaximumHeight(70)
         self.layout.addWidget(self.method_info)
 
         action_layout = QHBoxLayout()
-        self.erase_btn = QPushButton("شروع پاک‌سازی ایمن")
-        self.erase_btn.setStyleSheet("background-color: #d32f2f; color: white; font-weight: bold;")
+        self.erase_btn = QPushButton(" شروع پاک‌سازی ایمن")
+        self.erase_btn.setIcon(self.style().standardIcon(QStyle.SP_TrashIcon))
+        self.erase_btn.setStyleSheet("background-color: #c0392b;")
         self.erase_btn.clicked.connect(self.start_erasure)
         action_layout.addWidget(self.erase_btn)
 
-        self.cancel_btn = QPushButton("لغو عملیات")
+        self.cancel_btn = QPushButton(" لغو عملیات")
+        self.cancel_btn.setIcon(self.style().standardIcon(QStyle.SP_DialogCancelButton))
         self.cancel_btn.setEnabled(False)
         self.cancel_btn.clicked.connect(self.cancel_erasure)
         action_layout.addWidget(self.cancel_btn)
         self.layout.addLayout(action_layout)
 
         self.progress_bar = QProgressBar()
+        self.progress_bar.setTextVisible(False)
         self.layout.addWidget(self.progress_bar)
 
         self.status_label = QLabel("برای شروع، فایل یا پوشه‌ای را انتخاب کنید.")
         self.status_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.status_label)
+        
+        credit_label = QLabel("برنامه نویس : محمدعلی عباسپور <a href='https://intellsoft.ir' style='color: #3498db; text-decoration: none;'>intellsoft.ir</a>")
+        credit_label.setObjectName("credit_label")
+        credit_label.setTextFormat(Qt.RichText)
+        credit_label.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        credit_label.setOpenExternalLinks(True)
+        credit_label.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(credit_label)
         
         self.setLayout(self.layout)
         self.show_method_info()
@@ -263,19 +333,15 @@ class SecureEraser(QWidget):
     def set_ui_for_erasure(self, is_running):
         self.erase_btn.setEnabled(not is_running)
         self.cancel_btn.setEnabled(is_running)
-        # ... and other UI elements
         self.select_file_btn.setEnabled(not is_running)
         self.select_folder_btn.setEnabled(not is_running)
         self.detect_partitions_btn.setEnabled(not is_running)
-        if platform.system() == "Windows":
-            self.detect_dvr_btn.setEnabled(not is_running)
         
     def detect_partitions(self):
-        """شناسایی پارتیشن‌های استاندارد با `psutil`."""
         try:
-            partitions = psutil.disk_partitions()
+            partitions = psutil.disk_partitions(all=False)
             if not partitions:
-                QMessageBox.information(self, "اطلاع", "هیچ پارتیشنی یافت نشد.")
+                QMessageBox.information(self, "اطلاع", "هیچ پارتیشن قابل دسترسی یافت نشد.")
                 return
 
             dialog = DiskSelectionDialog(partitions, self)
@@ -285,41 +351,14 @@ class SecureEraser(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "خطا", str(e))
 
-    def detect_physical_disks_windows(self):
-        """شناسایی هاردهای فیزیکی با `wmic` در ویندوز (برای DVR)."""
-        if not is_admin():
-            QMessageBox.critical(self, "نیاز به دسترسی مدیر", "برای شناسایی هاردهای فیزیکی، برنامه باید با دسترسی مدیر (Administrator) اجرا شود.")
-            return
-        try:
-            cmd = "wmic diskdrive get Model,Caption,DeviceID,Partitions,Size"
-            raw_output = subprocess.check_output(cmd, shell=True, text=True, stderr=subprocess.DEVNULL)
-            
-            lines = raw_output.strip().split('\n')[1:]
-            disks_info = [line.strip() for line in lines if line.strip()]
-            
-            if not disks_info:
-                QMessageBox.information(self, "اطلاع", "هیچ هارد فیزیکی یافت نشد.")
-                return
-
-            QMessageBox.information(self, "راهنمای شناسایی هارد DVR",
-                "پنجره بعدی لیست هاردهای فیزیکی متصل به کامپیوتر شما را نشان می‌دهد.\n\n"
-                "• اگر هارد DVR شما پارتیشن قابل خواندن توسط ویندوز نداشته باشد (مثلاً فرمت ext4 لینوکس)، تعداد پارتیشن‌های آن صفر نمایش داده می‌شود.\n\n"
-                "• برای دسترسی به فایل‌های این هاردها در ویندوز، باید نرم‌افزار جانبی مانند **Ext2Fsd** یا **Paragon Linux File Systems for Windows** را نصب کنید تا یک نام درایو (مثلاً E:) به آن اختصاص یابد.\n\n"
-                "• پس از نصب این ابزارها و مشاهده درایو در ویندوز، می‌توانید از دکمه 'انتخاب پوشه' برای انتخاب و حذف فایل‌ها استفاده کنید."
-            )
-
-            # نمایش دیالوگ اطلاعاتی
-            InfoDialog("لیست هاردهای فیزیکی", disks_info, self).exec_()
-
-        except Exception as e:
-            QMessageBox.critical(self, "خطا در اجرای دستور wmic", "خطا در شناسایی هاردها. اطمینان حاصل کنید که با دسترسی ادمین اجرا کرده‌اید.\n\n" + str(e))
-
 class DiskSelectionDialog(QDialog):
-    """دیالوگی برای انتخاب پارتیشن از لیست."""
+    """دیالوگی برای انتخاب پارتیشن‌های استاندارد."""
     def __init__(self, partitions, parent=None):
         super().__init__(parent)
         self.setWindowTitle("انتخاب پارتیشن برای اضافه کردن به لیست")
         self.resize(600, 400)
+        self.setStyleSheet(STYLESHEET)
+        
         self.selected_paths = []
         layout = QVBoxLayout(self)
         self.list_widget = QListWidget()
@@ -334,6 +373,7 @@ class DiskSelectionDialog(QDialog):
                 self.list_widget.addItem(item)
             except Exception: continue
         layout.addWidget(self.list_widget)
+        
         button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         button_box.accepted.connect(self.accept_selection)
         button_box.rejected.connect(self.reject)
@@ -350,23 +390,9 @@ class DiskSelectionDialog(QDialog):
     def get_selected_paths(self):
         return self.selected_paths
 
-class InfoDialog(QDialog):
-    """یک دیالوگ ساده برای نمایش اطلاعات متنی."""
-    def __init__(self, title, info_list, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle(title)
-        self.resize(700, 300)
-        layout = QVBoxLayout(self)
-        text_edit = QTextEdit()
-        text_edit.setReadOnly(True)
-        text_edit.setPlainText("\n".join(info_list))
-        layout.addWidget(text_edit)
-        button_box = QDialogButtonBox(QDialogButtonBox.Ok)
-        button_box.accepted.connect(self.accept)
-        layout.addWidget(button_box)
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setFont(QFont("Segoe UI", 10))
     window = SecureEraser()
     window.show()
     sys.exit(app.exec_())
