@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.seo.title }}</title>
+    <meta name="description" content="{{ site.seo.description }}">
+    <meta name="keywords" content="{{ site.seo.keywords | join: ', ' }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>{{ site.title }}</h1>
+                <p>{{ site.description }}</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn primary-btn">دانلود نرم‌افزار</a>
+                    <a href="{{ site.github_repo }}" class="btn secondary-btn">مشاهده کد منبع</a>
+                </div>
+            </div>
+            <div class="header-image">
+                <img src="assets/screenshot.png" alt="نمای نرم‌افزار حذف ویدیوهای دوربین مداربسته">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="features">
+            <h2>ویژگی‌های برتر نرم‌افزار</h2>
+            <div class="features-grid">
+                {% for feature in site.features %}
+                <div class="feature-card">
+                    <div class="feature-icon">{{ feature.icon }}</div>
+                    <h3>{{ feature.title }}</h3>
+                    <p>{{ feature.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="applications">
+            <h2>کاربردهای اصلی</h2>
+            <div class="applications-container">
+                <ul class="applications-list">
+                    {% for application in site.applications %}
+                    <li>{{ application }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <section id="why">
+            <h2>چرا این نرم‌افزار ضروری است؟</h2>
+            <div class="why-content">
+                <p>در دنیای امروز، حفاظت از داده‌های حساس مانند فیلم‌های دوربین مداربسته از اهمیت بالایی برخوردار است. روش‌های معمول حذف فایل‌ها، اطلاعات را به طور کامل نابود نمی‌کنند و با ابزارهای بازیابی قابل بازگردانی هستند. این نرم‌افزار با استفاده از الگوریتم‌های پیشرفته، اطمینان حاصل می‌کند که اطلاعات به طور کامل و غیرقابل بازگشت نابود شوند.</p>
+                
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>روش حذف</th>
+                                <th>امکان بازیابی</th>
+                                <th>امنیت</th>
+                                <th>سرعت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>حذف معمولی</td>
+                                <td>بسیار بالا</td>
+                                <td>ضعیف</td>
+                                <td>سریع</td>
+                            </tr>
+                            <tr>
+                                <td>حذف با نرم‌افزارهای معمولی</td>
+                                <td>متوسط</td>
+                                <td>متوسط</td>
+                                <td>متوسط</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>این نرم‌افزار</td>
+                                <td>غیرممکن</td>
+                                <td>عالی</td>
+                                <td>بهینه</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="download">
+            <h2>دانلود نرم‌افزار</h2>
+            <div class="download-section">
+                <div class="version-info">
+                    <p>نسخه فعلی: <strong>1.0.0</strong></p>
+                    <p>آخرین بروزرسانی: <strong>27 تیر 1403</strong></p>
+                    <div class="system-requirements">
+                        <h3>نیازمندی‌های سیستم:</h3>
+                        <ul>
+                            <li>ویندوز 10 و بالاتر</li>
+                            <li>حداقل 2GB RAM</li>
+                            <li>100MB فضای خالی دیسک</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="download-options">
+                    <h3>انتخاب نسخه:</h3>
+                    <div class="download-buttons">
+                        <a href="#" class="btn download-btn">
+                            <span class="os-icon">🪟</span>
+                            نسخه ویندوز (64-bit)
+                        </a>
+                        <a href="#" class="btn download-btn">
+                            <span class="os-icon">🍎</span>
+                            نسخه مک‌اواس
+                        </a>
+                        <a href="#" class="btn download-btn">
+                            <span class="os-icon">🐧</span>
+                            نسخه لینوکس
+                        </a>
+                    </div>
+                    <div class="checksum">
+                        <p>Checksum (SHA-256): <code>a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6</code></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guide">
+            <h2>راهنمای گام به گام</h2>
+            <div class="guide-container">
+                <ol class="guide-steps">
+                    {% for step in site.guide_steps %}
+                    <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+                <div class="guide-video">
+                    <div class="video-placeholder">
+                        <div class="play-icon">▶</div>
+                        <p>نمایش ویدیوی آموزشی</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>پرسش‌های متداول</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3>آیا این نرم‌افزار واقعاً فایل‌ها را غیرقابل بازگشت حذف می‌کند؟</h3>
+                    <p>بله، این نرم‌افزار از الگوریتم‌های پیشرفته حذف اطلاعات استفاده می‌کند که بر اساس استانداردهای امنیتی وزارت دفاع آمریکا (DoD 5220.22-M) طراحی شده‌اند و بازیابی اطلاعات پس از حذف را غیرممکن می‌سازند.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>آیا برای استفاده از نرم‌افزار نیاز به دانش فنی دارم؟</h3>
+                    <p>خیر، این نرم‌افزار با رابط کاربری ساده طراحی شده است و کاربران بدون دانش فنی نیز می‌توانند به راحتی از آن استفاده کنند. راهنمای گام به گام نیز در خود نرم‌افزار موجود است.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>آیا این نرم‌افزار رایگان است؟</h3>
+                    <p>بله، این نرم‌افزار به صورت کاملاً رایگان و متن‌باز ارائه شده است و می‌توانید از طریق گیت‌هاب به کد منبع آن دسترسی داشته باشید.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>نرم‌افزار حذف دائمی ویدیوهای دوربین مداربسته</h3>
+                    <p>حذف امن و غیرقابل بازگشت فیلم‌های دوربین‌های مداربسته با استانداردهای امنیتی پیشرفته</p>
+                </div>
+                <div class="footer-links">
+                    <h4>لینک‌های مفید</h4>
+                    <ul>
+                        <li><a href="{{ site.github_repo }}">صفحه پروژه در GitHub</a></li>
+                        <li><a href="{{ site.author.url }}">وبسایت اینتل سافت</a></li>
+                        <li><a href="mailto:{{ site.author.email }}">پشتیبانی فنی</a></li>
+                        <li><a href="#">مستندات فنی</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>ارتباط با ما</h4>
+                    <p>ایمیل: <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></p>
+                    <p>وبسایت: <a href="{{ site.author.url }}">{{ site.author.url }}</a></p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">📱</a>
+                        <a href="#" class="social-icon">💬</a>
+                        <a href="#" class="social-icon">📧</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© {{ site.time | date: '%Y' }} توسعه داده شده توسط {{ site.author.name }}. تمامی حقوق محفوظ است.</p>
+                <div class="legal-links">
+                    <a href="#">قوانین استفاده</a>
+                    <a href="#">حریم خصوصی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
